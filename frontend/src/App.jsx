@@ -9,12 +9,15 @@ import UploadArea from "./components/UploadArea";
 import Loader from "./components/Loader";
 import ResultCard from "./components/ResultCard";
 
+// Vite uses import.meta.env
+const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+console.log("🔍 API_URL:", API_URL);
+console.log("🔍 All env vars:", import.meta.env);
+
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
-
   const [result, setResult] = useState(null);
-
   const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
@@ -36,23 +39,31 @@ function App() {
     setLoading(true);
 
     try {
+      console.log("📤 Sending to:", `${API_URL}/predict`);
+      
       const response = await axios.post(
-        "http://127.0.0.1:8000/predict",
+        `${API_URL}/predict`,
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          timeout: 30000, // 30 seconds timeout
         }
       );
 
+      console.log("✅ Response:", response.data);
       setResult(response.data);
     } catch (error) {
-      console.error(error);
-      alert(
-        error.response?.data?.detail ||
-          "Prediction failed. Please try again."
-      );
+      console.error("❌ Error:", error);
+      
+      if (error.response) {
+        alert(`Error ${error.response.status}: ${error.response.data?.detail || "Prediction failed"}`);
+      } else if (error.request) {
+        alert("Cannot connect to backend. Please try again later.");
+      } else {
+        alert("Error: " + error.message);
+      }
     } finally {
       setLoading(false);
     }
