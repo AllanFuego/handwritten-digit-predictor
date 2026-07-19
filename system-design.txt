@@ -1,0 +1,41 @@
+Handwritten-Digit-Recognition/
+
+│
+├── backend/
+│   │
+│   ├── app/
+│   │    ├── main.py
+│   │    ├── routes.py
+│   │    ├── predict.py
+│   │    ├── preprocess.py
+│   │    ├── config.py
+│   │    └── utils.py
+│   │
+│   ├── models/
+│   │      best_model.pkl
+│   │      scaler.pkl
+│   │
+│   ├── requirements.txt
+│   └── run.py
+│
+│
+├── frontend/
+│   │
+│   ├── src/
+│   │    ├── components/
+│   │    │      UploadBox.jsx
+│   │    │      ResultCard.jsx
+│   │    │      Loader.jsx
+│   │    │
+│   │    ├── services/
+│   │    │      api.js
+│   │    │
+│   │    ├── App.jsx
+│   │    └── main.jsx
+│   │
+│   ├── package.json
+│   └── vite.config.js
+│
+│
+├── README.md
+└── screenshots/
