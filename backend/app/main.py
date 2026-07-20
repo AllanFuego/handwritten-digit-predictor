@@ -18,6 +18,7 @@ origins = [
     "http://127.0.0.1:5173",
     "http://localhost:4173",   # preview - ADD THIS!
     "http://127.0.0.1:4173",   # preview - ADD THIS!
+    "https://handwritten-digit-predictor.vercel.app"
 ]
 
 app.add_middleware(
